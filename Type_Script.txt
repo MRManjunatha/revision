@@ -1,0 +1,17 @@
+Type Script
+
+let count = 0;
+
+while (count < 5) {
+  console.log("Count is: " + count);
+  count++; // Increment count to avoid an infinite loop
+}
+
+
+for (let i = 0; i < 5; i++) {
+    console.log(`Iteration ${i}`);
+}
+
+tsc "filename.ts"
+
+node "filename.ts"
