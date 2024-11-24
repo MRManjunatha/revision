@@ -1,0 +1,87 @@
+Validation form
+
+
+form.html
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Registration Form</title>
+<link rel="stylesheet" href="Style.css">
+</head>
+<body>
+<h1>Registration Form</h1>
+<form onsubmit="return validateform()">
+<label for="name">Name:</label>
+<input type="text" id="name"/><br>
+
+<label for="email">Email:</label>
+<input type="email" id="email"/><br>
+
+<label for="address">Address:</label>
+<input type="address" id="address"/><br><br>
+
+<input type="Submit" value="Submit"/>
+</form>
+<script>
+function validateform(){
+var name=document.getElementById("name").value;
+var email=document.getElementById("email").value;
+var address=document.getElementById("address").value;
+if(name=== ""||email=== ""||address=== ""){
+alert("fill the required fields");
+return false;
+}
+alert("registred success");
+}
+</script>
+</body>
+</html>
+
+App.css
+
+/* Body styling */ 
+body {
+    background-color: azure;
+    justify-content: center;
+    text-align: center;
+    margin-top: 100px;
+    align-items: center;
+
+}
+form{
+    padding: 20px;
+    border-radius: 15px;
+    width:30%;
+    margin-left: 240px;
+    height: 280PX;
+    display: FLEX;
+    flex-direction: column;
+    border: 4px solid black;
+}
+label{
+    padding-right:3000%;
+    color:green;
+    font-weight: bold;
+
+
+}
+input{
+    border-radius: 2px;
+    height: 25px;
+    border-radius: 5px;
+
+}
+ input:hover{
+    box-shadow: 2px 3px 4px rgb(14, 15, 14)
+    
+ }
+input[type="Submit"]{
+    height: 30px;
+    cursor: pointer;
+    color: rgb(10, 10, 9);
+    font-weight: bold;
+    background-color: rgb(229, 233, 215);
+    font-family: 'Times New Roman', Times, serif;
+}
+
