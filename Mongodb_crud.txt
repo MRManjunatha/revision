@@ -1,0 +1,86 @@
+Mongodb crud
+
+spring.application.name=demo10
+spring.data.mongodb host=localhost
+spring.data.mongodb port=8080
+spring.data.mongodb.database=College
+
+
+
+public interface Myrepo extends MongoRepository<Mydata,Integer> {
+
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Document(collection="student")
+public class Mydata {
+	@Id
+	private int sid;
+	private String sname;
+	public int getSid() {
+		return sid;
+	}
+	public void setSid(int sid) {
+		this.sid = sid;
+	}
+	public String getSname() {
+		return sname;
+	}
+	public void setSname(String sname) {
+		this.sname = sname;
+	}
+
+
+
+
+
+
+@RestController
+public class Mycontroller {
+	@Autowired
+	private Myrepo obj;
+	@PostMapping("/post")
+	public String save(@RequestBody Mydata db)
+	{
+		obj.save(db);
+		return "inserted";
+	}
+		@GetMapping("/get")
+		public List<Mydata> getv()
+		{
+			return obj.findAll();
+	
+		}
+		@PutMapping("/put/{id}")
+		public String put(@PathVariable int id , @RequestBody Mydata d)
+		{
+	     Mydata u=obj.findById(id).orElse(null);
+					if (u!=null)
+					{
+						u.setSname(d.getSname());
+						obj.save(u);
+						return "updated";
+					}
+					else
+					{
+						return "ID not found ";
+					}
+		}
+		
+	@DeleteMapping("/del/{id}")
+	public String delete(@PathVariable int id) {
+		if (obj.existsById(id)) {
+			obj.deleteById(id);
+			return "deleted";
+			
+		}
+		else {
+			return "id does not match";
+		}
+	}
+	}
+	
+
+
+	
