@@ -1,0 +1,148 @@
+Product catalog
+
+ProductCatalog.js
+
+import React, { useState } from 'react'; 
+export default function ProductCatalog() { 
+const [pname, setPname] = useState(""); 
+const [pprice, setPprice] = useState(""); 
+const [pdescription, setPdescription] = useState(""); 
+const [submit, setSubmit] = useState(false); 
+function handlePname(e) { 
+setPname(e.target.value); 
+} 
+function handlePprice(e) { 
+setPprice(e.target.value); 
+} 
+function handlePdescription(e) { 
+setPdescription(e.target.value); 
+} 
+function handleSubmit(e) { 
+e.preventDefault(); 
+console.log("Product Name:", pname); 
+console.log("Product Price:", pprice); 
+console.log("Product Description:", pdescription); 
+console.log(`Product ${pname} added`); 
+setSubmit(true); 
+clearAll(); 
+}
+
+function clearAll() { 
+setPname(""); 
+setPprice(""); 
+setPdescription(""); 
+} 
+function successMessage() { 
+if (submit) { 
+return ( 
+<div> 
+<p id="p">Product added successfully!</p> 
+</div> 
+); 
+} 
+} 
+return ( 
+<> 
+<h1>Product Catalog</h1> 
+<div className="form"> 
+<form onSubmit={handleSubmit}> 
+<label htmlFor="ProductName">Product Name:</label> 
+<input type="text" id="name" name="ProductName" value={pname} 
+onChange={handlePname} required /><br /> 
+<label htmlFor="ProductPrice">Product Price:</label> 
+<input type="number" id="price" name="ProductPrice" value={pprice} 
+onChange={handlePprice} required /><br /> 
+<label htmlFor="ProductDescription">Product Description:</label> 
+<input type="text" id="description" name="ProductDescription" 
+value={pdescription} onChange={handlePdescription} required /><br /> 
+<button id="btn" type="submit">Add Product</button> 
+</form> 
+</div> 
+<div id="d1"> 
+{successMessage()} 
+</div> 
+</> 
+); 
+}
+
+App.js
+import React from 'react'; 
+import './App.css'; 
+import ProductCatalog from './ProductCatalog'; 
+export default function App() { 
+return ( 
+<div> 
+<ProductCatalog /> 
+</div> 
+); 
+} 
+
+
+App.css
+
+body{
+  background-color: rgb(223, 238, 238);
+ 
+}
+form{
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  border-style: solid;
+  margin: 150px 200px  50px 200px;
+  margin-right: 200px;
+  border-radius: 30px;
+  padding:0px;
+  height: 300px;
+  width: 250px;
+  border-color: black;
+  padding-top: 1px;
+}
+label{
+  color: blue;
+  padding-right:80px;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+  height: 20px;
+  width: 80px;
+}
+input{
+  height: 18px;
+  width: 150px;
+  border-radius: 5px;
+  box-shadow: rgb(99, 98, 98);
+
+}
+input:hover{
+  background-color: rgb(240, 248, 245);
+  box-shadow:  3px 4px;
+}
+div #d1{
+  color: rgb(231, 74, 12);
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+  font-size: 30px;
+  padding-top: 1px;
+  padding-bottom: 5px;
+}
+#btn{
+  background-color: antiquewhite;
+  border-radius: 5px;
+  width: 160px;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 2px,3px;
+  
+}
+div #p{
+  text-align: center;
+  color: rgb(10, 47, 235);
+  margin-right: 100px;
+  margin-left: 0px;
+  margin-top: 1%;
+  font-weight: bold;
+  margin-bottom: 750px;
+  
+}
