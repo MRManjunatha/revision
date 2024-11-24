@@ -1,0 +1,83 @@
+MySQL crud operations
+
+
+
+Appilication properties:
+
+spring.application.name=mysq
+spring.datasource.url=jdbc:mysql://localhost:3306/harsha
+spring.datasource.username=root
+spring.datasource.password=root
+spring.jpa.hibernate.ddl-auto=update
+
+repository interface:
+
+public interface Myrepo extends JpaRepository<Myentity,Integer>
+
+entity class:
+
+@Entity
+@Table(name="std")
+public class Myentity {
+@Id
+private int sid;
+private String sname;
+public int getSid() {
+	return sid;
+}
+public void setSid(int sid) {
+	this.sid = sid;
+}
+public String getSname() {
+	return sname;
+}
+public void setSname(String sname) {
+	this.sname = sname;
+} 
+}
+
+Controller class
+
+@RestController
+public class Mycontroller {
+	@Autowired
+	Myrepo obj;
+	@GetMapping("/get")
+	public List<Myentity> getv(){
+	return obj.findAll();	
+	}
+	@PostMapping("/post")
+	public String save(Myentity db) {
+		obj.save(db);
+		return "inserted";
+	}
+	@PutMapping("/put/{id}")
+	public String putget(@PathVariable int id,@RequestBody Myentity d) {
+		Myentity u=obj.findById(id).orElse(null);
+		if(u!=null) {
+			u.setSname(d.getSname());
+			obj.save(u);
+			return "updated";
+		}
+		else 
+		{
+			return "id not found";
+		}
+	}
+	
+	@DeleteMapping("/del/{id}")
+	public String delete(@PathVariable int id )
+	{
+		if (obj.existsById(id)) 
+		{
+			obj.deleteById(id);
+			return "deleted";
+		}
+		else
+		{
+			return "ID not found";
+		}
+	}
+}
+
+
