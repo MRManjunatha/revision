@@ -1,0 +1,156 @@
+single page application
+
+signup.js
+
+import React, { useState } from 'react';
+export default function Signup(){
+    const[name,setName]=useState("");
+    const[id,setId]=useState("");
+    const[password,setPassword]=useState("");
+    const[submit,setSubmit]=useState(false);
+
+    function handleName(e){
+        setName(e.target.value);
+    }
+    function handleId(e){
+        setId(e.target.value);
+    }
+    function handlePassword(e){
+        setPassword(e.target.value);
+    }
+    function handlesubmit(e){
+        e.preventDefault();
+    if(name=== ""|| id=== ""|| password=== ""){
+        alert("fill the blanks")
+    }
+    else{
+        setSubmit(true);
+        clearAll();
+    }
+    }
+    function clearAll(){
+        setName("");
+        setId("");
+        setPassword("");
+    }
+    function successMessage(){
+        if (submit){
+             return(
+                <div>
+                    <p id="p">user registered successfully</p>
+                </div>
+             );
+            }
+        }
+            return(
+                <div>
+                    <div className='form'>
+                    <form onSubmit={handlesubmit}>
+                        <div id="d1">
+                            <p>Signup</p>
+                        </div>
+                    <label htmlFor='UserName'>User Name</label>
+                    <input type='text' id='name' name='userName' value={name} onChange={handleName}/>
+                    <label htmlFor='EmailId'>Email Id</label>
+                    <input type='email' id='email' name='EmailId' value={id} onChange={handleId}/>
+                    <label htmlFor='Password'>Password</label>
+                    <input type='text' id='password' name='Password' value={password} onChange={handlePassword}/><br></br>
+                    <button type='submit' id="btn">Create account</button>                                        
+                    </form>
+                    </div>
+                    <div id="d1">
+                        {successMessage()}
+                    </div>
+                      </div>
+            );
+        }
+
+
+App.js
+
+import logo from './logo.svg';
+import './App.css';
+import Signup from './Signup';
+
+function App() {
+  return (
+    <div>
+    <Signup/>
+    </div>
+  );
+}
+
+export default App;
+
+
+App.cs
+
+body{
+  background-color: rgb(223, 238, 238);
+ 
+}
+form{
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  border-style: solid;
+  margin: 150px 200px  50px 200px;
+  margin-right: 200px;
+  border-radius: 30px;
+  padding:0px;
+  height: 300px;
+  width: 250px;
+  border-color: black;
+  padding-top: 1px;
+}
+label{
+  color: blue;
+  padding-right:80px;
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+  height: 20px;
+  width: 80px;
+}
+input{
+  height: 18px;
+  width: 150px;
+  border-radius: 5px;
+  box-shadow: rgb(99, 98, 98);
+
+}
+input:hover{
+  background-color: rgb(240, 248, 245);
+  box-shadow:  3px 4px;
+}
+div #d1{
+  color: rgb(231, 74, 12);
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
+  font-size: 30px;
+  padding-top: 1px;
+  padding-bottom: 5px;
+}
+#btn{
+  background-color: antiquewhite;
+  border-radius: 5px;
+  width: 160px;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 2px,3px;
+  
+}
+div #p{
+  text-align: center;
+  color: rgb(10, 47, 235);
+  margin-right: 100px;
+  margin-left: 0px;
+  margin-top: 1%;
+  font-weight: bold;
+  margin-bottom: 750px;
+  
+}
+
+
+    
