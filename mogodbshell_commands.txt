@@ -1,0 +1,11 @@
+use manja;
+db.createCollection("student");
+db.student.insertOne({name:"mithun",age:18,address:"mysuru"});
+db.student.inserMany([{name:"mithun",age:18,address:"mysuru"},{name:"mithun",age:19,address:"mysuru"}]);
+db.student.find().pretty();
+db.student.updateOne({name:"mithun"},{"$set":{age:19}});
+db.student.updateOne({age:18}},{"$set":{name:"mithun"}});
+db.student.deleteOne({name:"manja"});
+db.student.deleteOne({address:"mysuru"});
+db.student.drop();
+db.dropDatabase();
